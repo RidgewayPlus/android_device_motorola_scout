@@ -1,6 +1,8 @@
 ## All proprietary files from this list, unless pinned and noted otherwise,
-## are from motorola edge 60 pro (16 W1VV36M.7-21-5 bb36b3).
-## variant: RETIN
+## are from motorola scout (scout_g_sys, system 16 W1VCS36M.14-20-19-7,
+## vendor 14 W1VCS36H.14-20-19-7), cid50 retail package.
+## (An earlier revision of this header credited edge 60 pro; every entry in
+## this list was verified to resolve against scout's own stock partitions.)
 
 # AEE
 vendor/lib64/libaedv.so
