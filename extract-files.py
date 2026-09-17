@@ -133,6 +133,13 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/lib64/android.hardware.biometrics.common.util-moto.so': blob_fixup()
         .replace_needed('android.hardware.biometrics.common-V3-ndk.so', 'android.hardware.biometrics.common-V3-ndk-moto.so'),
 
+    # hardware/motorola/interfaces builds com.motorola.hardware.biometric.fingerprint
+    # from source, which Soong puts in system, so the stock vendor copy has to be
+    # renamed the same way the -V3-ndk pair above is. libgf_hal.so is the only
+    # remaining consumer of the stock library and gets its DT_NEEDED rewritten.
+    'vendor/lib64/libgf_hal.so': blob_fixup()
+        .replace_needed('com.motorola.hardware.biometric.fingerprint-V2-ndk.so', 'com.motorola.hardware.biometric.fingerprint-V2-ndk-moto.so'),
+
     'vendor/bin/hw/motorola.hardware.sensorext-service': blob_fixup()
         .add_needed('libui_shim.so'),
 
