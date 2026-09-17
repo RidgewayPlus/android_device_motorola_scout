@@ -232,8 +232,15 @@ PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/seccomp_policy/android.hardware.media.c2@1.2-mediatek-64b.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/android.hardware.media.c2@1.2-mediatek-64b.policy
 
 # NFC
+# scout ships the NXP SN220 NFC controller, not an ST one. Stock carries
+# vendor/bin/hw/android.hardware.nfc-service.nxp, nfc_nci_nxp_snxxx.so and the
+# libnfc-nxp-*.conf set, and no ST HAL at all, so the ST service must not be
+# installed: hardware/st/nfc builds a source android.hardware.nfc-service.st
+# whose vintf fragment declares android.hardware.nfc.INfc/default - the same
+# fqname the NXP fragment declares - which collides during VINTF assembly.
+# vendor/motorola/scout already pulls in the NXP prebuilt and its fragment.
 PRODUCT_PACKAGES += \
-    android.hardware.nfc-service.st \
+    android.hardware.nfc-service.nxp \
     com.android.nfc_extras \
     libchrome.vendor \
     Tag
@@ -244,7 +251,12 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.uicc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.uicc.xml \
     frameworks/native/data/etc/android.hardware.nfc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.xml
 
-DEVICE_NFC_SKUS := dns dnsf ns nsf
+# SKU names must match the directories stock actually ships on odm
+# (sku_b, sku_bne, sku_d, sku_dne). The previous list (dns dnsf ns nsf) came
+# from a different Motorola device, so these permission files landed in
+# directories the framework never reads on scout - silently dropping NFC eSE,
+# OMAPI eSE and strongbox keystore support.
+DEVICE_NFC_SKUS := b bne d dne
 
 PRODUCT_COPY_FILES += \
     $(foreach DEVICE_NFC_SKU, $(DEVICE_NFC_SKUS), \
