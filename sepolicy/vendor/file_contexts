@@ -92,9 +92,6 @@
 
 # NFC
 /dev/nq-nfc                                                                            u:object_r:nfc_device:s0
-/dev/nq-nci                                                                            u:object_r:nfc_device:s0
-/dev/p73                                                                               u:object_r:nfc_device:s0
-/dev/sec-nfc                                                                           u:object_r:nfc_device:s0
 /vendor/bin/hw/android\.hardware\.nfc@1\.2-service\.sec                                u:object_r:hal_nfc_default_exec:s0
 
 # Neural Networks
@@ -111,9 +108,9 @@
 # MTK's mtkfusionrild.te adds its permissions to the 'rild' domain
 /vendor/bin/hw/mtkfusionrild                                                          u:object_r:rild_exec:s0
 
-# PQ
-/vendor/bin/hw/vendor\.mediatek\.hardware\.pq_aidl-service                             u:object_r:mtk_hal_pq_exec:s0
-/vendor/bin/hw/vendor\.mediatek\.hardware\.mmlpq@V1-service                            u:object_r:mtk_hal_pq_exec:s0
+# PQ binaries are labeled in device/mediatek/sepolicy_vndr:
+# pq_aidl-service -> mtk_hal_pq_exec, mmlpq@V1-service -> mtk_hal_mmlpq_exec.
+# Do not relabel mmlpq as mtk_hal_pq_exec; that collides with vndr's domain.
 
 # Secure Element
 /vendor/bin/hw/android\.hardware\.secure_element-service\.thales                       u:object_r:hal_secure_element_default_exec:s0
@@ -150,14 +147,12 @@
 /dev/block/by-name/prodpersist                                                         u:object_r:prodpersist_block_device:s0
 /dev/block/by-name/tzapp                                                               u:object_r:tzapp_block_device:s0
 /dev/block/by-name/tzapp_[ab]                                                          u:object_r:tzapp_block_device:s0
-/dev/block/by-name/modem(_[ab])?                                                       u:object_r:md_block_device:s0
 /dev/block/sdc31                                                                       u:object_r:prodpersist_block_device:s0
 /dev/block/sdc61                                                                       u:object_r:tzapp_block_device:s0
 /vendor/bin/hw/com\.motorola\.hardware\.display\.panel-service                  u:object_r:hal_display_panel_exec:s0
 /vendor/bin/hw/motorola\.hardware\.fdr-service                                  u:object_r:hal_fdr_exec:s0
 /vendor/bin/hw/vendor\.mediatek\.hardware\.mtkpower-service\.mediatek           u:object_r:mtk_hal_power_exec:s0
 /vendor/bin/hw/motorola\.hardware\.input@1\.1-service                 u:object_r:hal_motorola_input_exec:s0
-/dev/aol_geofence                                                   u:object_r:aol_geofence_device:s0
 
 # Suspend Wakeups
 /sys/devices/platform/charger/power_supply/[^/]+/wakeup[0-9]+(/.*)?   u:object_r:sysfs_wakeup:s0

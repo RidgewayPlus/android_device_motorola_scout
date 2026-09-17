@@ -6,34 +6,11 @@ com.motorola.hardware.biometric.fingerprint.IMotoFpsNavigate/default            
 com.fingerprints.fpc.extension.IFpcExtension/default                            u:object_r:hal_fingerprint_test_service:s0
 
 # MTK LBS Service
-vendor.mediatek.hardware.lbs.ILbs/AgpsDebugInterface                            u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/AgpsInterface                                 u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/mtk_agps2framework                            u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/mtk_agpsd2debugService                        u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/mtk_debugService2agpsd                        u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/mtk_debugService2mnld                         u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/mtk_framework2agps                            u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/mtk_lbs_log_v2s                               u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/mtk_lppe_socket_agps                          u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/mtk_lppe_socket_bt                            u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/mtk_lppe_socket_ipaddr                        u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/mtk_lppe_socket_lbs                           u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/mtk_lppe_socket_network                       u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/mtk_lppe_socket_sensor                        u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/mtk_lppe_socket_wlan                          u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/mtk_meta2mnld                                 u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/mtk_mnld2debugService                         u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/mtk_mnld2mtklogger                            u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/mtk_mnld2nlputils                             u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/mtk_mtklogger2mnld                            u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/mtk_jam2mnl                                   u:object_r:mtk_hal_lbs_service:s0
-vendor.mediatek.hardware.lbs.ILbs/mtk_mnl2jam                                   u:object_r:mtk_hal_lbs_service:s0
 
 # NWK OPT Service
 vendor.mediatek.hardware.nwk_opt_new.INwkOptNew/default                         u:object_r:mtk_hal_nwk_opt_service:s0
 
 # Shared Secret
-android.hardware.security.sharedsecret.ISharedSecret/strongbox                  u:object_r:hal_sharedsecret_service:s0
 
 # Motorola SensorExt
 motorola.hardware.sensors.ISensorExt/default                                    u:object_r:mot_sensorext_service:s0
@@ -51,7 +28,6 @@ motorola.hardware.fdr.IFdrControl/default                         u:object_r:hal
 mapper/mediatek                                                   u:object_r:mtk_hal_mali_platform_default_service:s0
 
 # PQ AIDL
-vendor.mediatek.hardware.pq_aidl.IPictureQuality_AIDL/default     u:object_r:mtk_hal_pq_service:s0
 
 # Custom HALs
 motorola.hardware.wireless.powershare.IMotPowerShare/default   u:object_r:hal_mot_powershare_service:s0
@@ -62,7 +38,6 @@ com.motorola.hardware.display.touch.IMotTouch/default          u:object_r:hal_mo
 vendor.dolby.dms.IDms/default                                  u:object_r:hal_dms_service:s0
 vendor.mediatek.hardware.videotelephony.IVideoTelephony/default u:object_r:hal_vtservice_aidl_service:s0
 motorola.hardware.camera.imgtuner.aidl.IImageTuning/default    u:object_r:hal_mot_imgtuner_service:s0
-vendor.mediatek.hardware.mmlpq.IMmlpq/default                  u:object_r:mtk_hal_mmlpq_service:s0
 vendor.mediatek.hardware.rcs.IRcs/default                      u:object_r:mtk_hal_rcs_service:s0
 
 # GNSS
@@ -78,4 +53,3 @@ vendor.mediatek.hardware.apuware.apusys.INeuronApusys/default             u:obje
 vendor.mediatek.hardware.apuware.utils.IApuwareUtils/default              u:object_r:mtk_hal_neuralnetworks_service:s0
 
 # Composer Extension
-vendor.mediatek.hardware.composer_ext.IComposerExt/default                u:object_r:mtk_hal_composer_ext_service:s0

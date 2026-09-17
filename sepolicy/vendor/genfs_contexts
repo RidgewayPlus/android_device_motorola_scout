@@ -21,7 +21,12 @@ genfscon proc /sys/vm/min_free_kbytes         u:object_r:proc_watermark_boost_fa
 genfscon proc /bootinfo u:object_r:vendor_proc_hw:s0
 genfscon proc /config u:object_r:vendor_proc_hw:s0
 genfscon proc /hw u:object_r:vendor_proc_hw:s0
-genfscon proc /cpu_loading/curr_cpu_loading u:object_r:proc_cpu_loading:s0
+# /cpu_loading/curr_cpu_loading is deliberately not listed here:
+# sepolicy_vndr/base/vendor/genfs_contexts already maps it to proc_curr_cpu_loading,
+# which is deliberately a distinct type from the other /cpu_loading/* knobs
+# (proc_cpu_loading). checkpolicy rejects two genfscon entries for the same
+# (fstype, path) outright - see the 'duplicate entry for genfs entry' error - so a
+# second entry here is a build failure, not an override.
 
 # Power Supply
 genfscon sysfs /devices/platform/11b72000.i2c/i2c-10/10-0038/power_supply/wireless                           u:object_r:sysfs_power_supply:s0

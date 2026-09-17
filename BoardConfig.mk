@@ -129,6 +129,13 @@ BOARD_MKBOOTIMG_INIT_ARGS += \
     --header_version $(BOARD_INIT_BOOT_HEADER_VERSION)
 
 TARGET_NO_KERNEL_OVERRIDE := true
+# Unsets INLINE_KERNEL_BUILDING in envsetup. Without this, soong still runs
+# generated_kernel_includes against kernel/motorola/scout, which does not exist
+# (the kernel is reconstructed from stock firmware).
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)-kernel/Image.gz
+# UAPI tarball built from bionic/libc/kernel/uapi (GKI 6.1 layout). Stops
+# vendor/lineage/build/soong from calling `make headers_install` in a missing
+# kernel tree, and gives cc.go prebuilt_kernel_headers instead.
 TARGET_PREBUILT_KERNEL_HEADERS := $(DEVICE_PATH)-kernel/kernel-uapi-headers.tar.gz
 
 # Partitions

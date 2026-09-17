@@ -88,6 +88,21 @@ blob_fixups: blob_fixups_user_type = {
      'vendor/lib64/libarmnn_ndk.mtk.vndk.so'): blob_fixup()
         .add_needed('liblog.so'),
 
+    # Every stock blob here links android.hardware.graphics.common v4. The
+    # platform builds the same interface at v7: hardware/interfaces/graphics/
+    # common/aidl freezes only up to v6, and with frozen: false Soong numbers the
+    # unfrozen current version max+1 = 7. libui and libgralloctypes link the
+    # unversioned android.hardware.graphics.common-ndk_shared, i.e. that v7, so a
+    # blob still on v4 or v6 makes any module that links both sides depend on two
+    # versions of one aidl_interface, which Soong rejects outright. v4, v6 and v7
+    # are all frozen-or-later revisions of one interface, so the ndk libs are
+    # additive and rewriting the DT_NEEDED straight to v7 is safe.
+    #
+    # Retargeting to v7 rather than v6 matters beyond these 14: hwcomposer.mtk_common
+    # links pq_aidl-V4, so leaving that blob on v6 handed hwcomposer a v6 edge it
+    # never had in stock, clashing with the v7 it inherits via libgralloctypes.
+    # These 14 are the only graphics.common linkers in the vendor tree, so moving
+    # all of them to v7 removes the version from the tree entirely.
     ('vendor/bin/hw/mt6878/android.hardware.graphics.allocator-V2-service-mediatek.mt6878',
      'vendor/lib64/egl/mt6878/libGLES_mali.so',
      'vendor/lib64/hw/mt6878/android.hardware.graphics.allocator-V2-mediatek.so',
@@ -102,7 +117,7 @@ blob_fixups: blob_fixups_user_type = {
      'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V2-ndk.so',
      'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V4-ndk.so',
      'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V7-ndk.so'): blob_fixup()
-        .replace_needed('android.hardware.graphics.common-V4-ndk.so', 'android.hardware.graphics.common-V6-ndk.so')
+        .replace_needed('android.hardware.graphics.common-V4-ndk.so', 'android.hardware.graphics.common-V7-ndk.so')
         .replace_needed('android.hardware.graphics.allocator-V1-ndk.so', 'android.hardware.graphics.allocator-V2-ndk.so'),
 
     'vendor/lib64/mt6878/libneuralnetworks_sl_driver_mtk_prebuilt.so': blob_fixup()

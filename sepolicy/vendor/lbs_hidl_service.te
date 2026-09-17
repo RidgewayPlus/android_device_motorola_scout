@@ -1,4 +1,7 @@
 binder_use(lbs_hidl_service)
 binder_call(lbs_hidl_service, servicemanager)
 
-add_service(lbs_hidl_service, mtk_hal_lbs_service)
+# Do not add_service() mtk_hal_lbs_service. sepolicy_vndr already does
+# hal_attribute_service(hal_mtk_lbs, mtk_hal_lbs_service) and
+# hal_server_domain(lbs_hidl_service, hal_mtk_lbs). A second add_service()
+# neverallow conflicts with hal_mtk_lbs_server.

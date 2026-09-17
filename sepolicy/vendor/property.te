@@ -14,7 +14,10 @@ vendor_internal_prop(vendor_nfc_prop);
 vendor_internal_prop(vendor_sku_prop);
 
 # TEE
-vendor_internal_prop(vendor_trustonic_prop)
+# vendor_trustonic_prop is declared in device/mediatek/sepolicy_vndr/base/vendor/property.te,
+# also via vendor_internal_prop(). Declaring it here too is a checkpolicy
+# 'Duplicate declaration of type' error. Note the declaration is macro-generated, so
+# grepping the sources for "type vendor_trustonic_prop" will not find it.
 
 # Face
 vendor_internal_prop(vendor_faceauth_prop)

@@ -1,7 +1,11 @@
 type mtk_hal_power_service, protected_service, service_manager_type, hal_service_type;
 type hal_moto_panel_aidl_service, protected_service, service_manager_type, hal_service_type;
 type hal_fdrcontrol_aidl_service, protected_service, service_manager_type, hal_service_type;
-type mtk_hal_pq_service, protected_service, service_manager_type, hal_service_type;
+# mtk_hal_pq_service, mtk_hal_mmlpq_service and mtk_hal_composer_ext_service are
+# declared in device/mediatek/sepolicy_vndr/base/vendor/service.te, which this
+# device also includes (BoardConfig.mk includes sepolicy_vndr/SEPolicy.mk). A
+# second declaration here is a checkpolicy 'Duplicate declaration of type' error;
+# the mtk declarations are identical or a superset, so rely on them.
 type hal_mot_powershare_service, protected_service, service_manager_type, hal_service_type;
 type mtk_hal_nvram_service, protected_service, service_manager_type, hal_service_type;
 type hal_zui_alarm_service, protected_service, service_manager_type, hal_service_type;
@@ -10,11 +14,9 @@ type hal_mot_touch_service, protected_service, service_manager_type, hal_service
 type hal_dms_service, protected_service, service_manager_type, hal_service_type;
 type hal_vtservice_aidl_service, protected_service, service_manager_type, hal_service_type;
 type hal_mot_imgtuner_service, protected_service, service_manager_type, hal_service_type;
-type mtk_hal_mmlpq_service, protected_service, service_manager_type, hal_service_type;
 type mtk_hal_rcs_service, protected_service, service_manager_type, hal_service_type;
 type mtk_hal_gnss_service, service_manager_type, hal_service_type;
 type mtk_hal_camera_bgservice, service_manager_type, hal_service_type;
 type mtk_hal_camera_atms_service, service_manager_type, hal_service_type;
 type mtk_hal_camera_aovservice, service_manager_type, hal_service_type;
 type mtk_hal_neuralnetworks_service, service_manager_type, hal_service_type;
-type mtk_hal_composer_ext_service, service_manager_type, hal_service_type;

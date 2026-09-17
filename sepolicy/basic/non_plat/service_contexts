@@ -1,2 +1,1 @@
 vendor.mediatek.hardware.camera.isphal.IISPModule/internal/1 u:object_r:mtk_hal_isphal_service:s0
-arm.mali.platform.ICompression/default u:object_r:mtk_hal_mali_platform_default_service:s0

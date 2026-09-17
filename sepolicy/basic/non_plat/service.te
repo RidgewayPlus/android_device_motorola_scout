@@ -1,3 +1,5 @@
 type mtk_hal_isphal_service, protected_service, service_manager_type, hal_service_type;
 
-type mtk_hal_mali_platform_default_service, service_manager_type, hal_service_type;
+# mtk_hal_mali_platform_default_service is declared in
+# device/mediatek/sepolicy_vndr/base/vendor/service.te with the same attributes;
+# redeclaring it here is a checkpolicy duplicate-type error.

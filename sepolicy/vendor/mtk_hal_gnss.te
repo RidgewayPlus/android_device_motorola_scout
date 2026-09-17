@@ -1,4 +1,14 @@
-allow mtk_hal_gnss aol_geofence_device:chr_file rw_file_perms;
-
-# Allow GNSS HAL to register its service
-allow mtk_hal_gnss mtk_hal_gnss_service:service_manager { add find };
+# Allow the GNSS HAL to register its IMtkGnss service, which this device labels
+# mtk_hal_gnss_service (see service_contexts).
+#
+# The domain is hal_gnss_default, not mtk_hal_gnss. mtk_hal_gnss does not exist:
+# nothing declares it, and nothing labels a binary or an init domain for it, so
+# rules written against it could never take effect. hal_gnss_default
+# (system/sepolicy/vendor/hal_gnss_default.te) is the domain the mediatek GNSS
+# service binaries actually run in - see the *_exec labels in
+# device/mediatek/sepolicy_vndr/base/vendor/file_contexts.
+#
+# Access to /dev/aol_geofence is not granted here because
+# sepolicy_vndr/base/vendor/hal_gnss_default.te already grants it, more narrowly
+# (rw_file_perms_no_map rather than rw_file_perms).
+allow hal_gnss_default mtk_hal_gnss_service:service_manager { add find };

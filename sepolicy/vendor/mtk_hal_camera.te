@@ -12,7 +12,11 @@ allow mtk_hal_camera vendor_imager_metadata_file:file rw_file_perms;
 allow mtk_hal_camera vendor_imager_metadata_file:file { create setattr };
 allow mtk_hal_camera sysfs_therm:dir r_dir_perms;
 allow mtk_hal_camera sysfs_therm:file r_file_perms;
-allow mtk_hal_camera proc_cpu_loading:file r_file_perms;
+# curr_cpu_loading carries its own type (proc_curr_cpu_loading), separate from the
+# other /cpu_loading/* knobs (proc_cpu_loading); sepolicy_vndr labels it that way and
+# already grants this same access. Keeping proc_cpu_loading here would have granted
+# the camera HAL read on the other seven knobs, which the platform policy withholds.
+allow mtk_hal_camera proc_curr_cpu_loading:file r_file_perms;
 r_dir_file(mtk_hal_camera, persist_data_file)
 get_prop(mtk_hal_camera, vendor_mot_prop)
 get_prop(mtk_hal_camera, system_mot_camera_prop)

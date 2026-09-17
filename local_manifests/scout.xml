@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Motorola scout (edge 60 fusion, MT6878) - crDroid 16.0 local manifest.
+
+  device/motorola/scout upstream ships no lineage.dependencies, so the
+  Motorola/MediaTek HAL repos it builds against are absent from crDroid's
+  default.xml and have to be named explicitly here.
+
+  Note on remotes: 'crdroid' already exists (snippets/crdroid.xml) with
+  fetch="https://github.com/" and revision 16.0. Do NOT redefine it here or
+  repo aborts the whole sync with "remote crdroid already exists with
+  different attributes".
+
+  device/motorola/scout and device/motorola/scout-kernel are deliberately NOT
+  listed:
+    * scout is our working fork and a forced repo sync would discard local
+      commits that are not on abdulla-li's main.
+    * scout-kernel is reconstructed locally from stock firmware (the upstream
+      moto-mt6878 repository is an empty placeholder).
+  Re-clone scout with:
+    git clone https://github.com/abdulla-li/android_device_motorola_scout \
+        -b main device/motorola/scout
+-->
+<manifest>
+  <remote name="lineageos" fetch="https://github.com/LineageOS" revision="lineage-23.2" />
+  <remote name="abdulla"   fetch="https://github.com/abdulla-li" />
+
+  <!-- Per-device HAL repos, not in crDroid's default.xml.
+       Provides libmtkperf_client, MtkInCallService, libpowerhalwrap_vendor,
+       android.hardware.power-service-mediatek and
+       vendor.lineage.touch-service.motorola. -->
+  <project path="hardware/mediatek" name="android_hardware_mediatek" remote="lineageos" />
+  <project path="hardware/motorola" name="android_hardware_motorola" remote="lineageos" />
+
+  <!-- MediaTek IMS (device.mk inherits vendor/mediatek/ims/ims.mk) -->
+  <project path="vendor/mediatek/ims" name="crdroidandroid/android_vendor_mediatek_ims"
+           remote="crdroid" revision="16.0" />
+
+  <!-- MediaTek vendor sepolicy (BoardConfig.mk includes
+       device/mediatek/sepolicy_vndr/SEPolicy.mk). Identical content to
+       LineageOS/android_device_mediatek_sepolicy_vndr lineage-23.2; the
+       crdroidandroid fork is pinned to 16.0 like the rest of the tree. -->
+  <project path="device/mediatek/sepolicy_vndr"
+           name="crdroidandroid/android_device_mediatek_sepolicy_vndr"
+           remote="crdroid" revision="16.0" />
+</manifest>

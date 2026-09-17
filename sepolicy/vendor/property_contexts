@@ -37,7 +37,6 @@ ro.boot.product.hardware.sku u:object_r:vendor_sku_prop:s0
 ro.vendor.product.hardware.sku.variant  u:object_r:vendor_sku_prop:s0
 
 # TEE
-ro.vendor.trustonic.ready u:object_r:vendor_trustonic_prop:s0 exact bool
 
 # Face
 vendor.faceauth.version u:object_r:vendor_faceauth_prop:s0 exact string

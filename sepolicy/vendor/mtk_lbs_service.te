@@ -1,1 +1,2 @@
-type mtk_hal_lbs_service, hal_service_type, service_manager_type;
+# mtk_hal_lbs_service is declared in device/mediatek/sepolicy_vndr/base/vendor/service.te
+# (with protected_service as well); redeclaring it here is a checkpolicy duplicate-type error.

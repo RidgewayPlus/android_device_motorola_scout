@@ -6,6 +6,9 @@ allow mtk_hal_pq boot_status_prop:file { getattr map open };
 allow mtk_hal_pq sysfs_leds:dir search;
 allow mtk_hal_pq sysfs_leds:file { open read };
 allow mtk_hal_pq self:binder call;
-add_service(mtk_hal_pq, mtk_hal_pq_service)
-add_service(mtk_hal_pq, mtk_hal_mmlpq_service)
+# Do not add_service() mtk_hal_pq_service or mtk_hal_mmlpq_service here.
+# sepolicy_vndr already allows the HAL server attributes to add them
+# (hal_mtk_pq_server / hal_mtk_mmlpq_server). add_service() also emits a
+# neverallow that only the named domain may add, which fails the
+# precompiled_sepolicy neverallow check against those attributes.
 

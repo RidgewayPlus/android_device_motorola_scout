@@ -1334,6 +1334,16 @@ vendor/lib64/hw/vendor.mediatek.hardware.mtkpower-aidl-impl.so
 vendor/lib64/libpowerhal.so
 vendor/lib64/libpower_timer.so
 vendor/lib64/vendor.mediatek.hardware.mtkpower-V1-ndk.so
+
+# The HIDL predecessor of mtkpower. Nothing declares it as a served interface -
+# power-mediatek.xml is AIDL-only - but the MTK camera stack still links it:
+# power@2.0.so is a DT_NEEDED of libmtkcam_perfctrl.so, libmtkcam_hwutils_android.so
+# and libmtkcam_pipelinemodel_utils.so, and power@1.1.so of libcameracustom.eis.so.
+# Stock ships both on vendor, and without them Soong's prebuilt ELF check stops the
+# build with "module <name> missing dependencies: vendor.mediatek.hardware.power@2.0".
+vendor/lib64/vendor.mediatek.hardware.power@1.1.so
+vendor/lib64/vendor.mediatek.hardware.power@2.0.so
+
 vendor/lib64/vendor.mediatek.framework.mtksf_ext-V2-ndk.so
 vendor/lib64/vendor.mediatek.hardware.mtkpower_applist-V1-ndk.so
 vendor/lib64/lib_power_applist.so
