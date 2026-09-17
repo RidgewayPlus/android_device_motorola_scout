@@ -23,6 +23,12 @@ namespace_imports = [
 ]
 
 blob_fixups: blob_fixups_user_type = {
+    # libgpud_sys links android.hardware.graphics.common v6 directly, but the
+    # platform's libui and libgralloctypes, which it also links, are built
+    # against v7. Soong rejects a module that depends on two versions of the
+    # same aidl_interface, so lift the direct dependency to v7 to match.
+    'system_ext/lib64/libgpud_sys.so': blob_fixup()
+        .replace_needed('android.hardware.graphics.common-V6-ndk.so', 'android.hardware.graphics.common-V7-ndk.so'),
 }
 
 module = ExtractUtilsModule(

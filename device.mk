@@ -180,6 +180,14 @@ PRODUCT_PACKAGES += \
     android.hidl.allocator@1.0-service
 
 # Init
+# hardware/mediatek/aidl/gadget builds a generic USB gadget rc named after
+# TARGET_BOARD_PLATFORM, which here resolves to the same "init.mt6878.usb.rc"
+# this device tree ships (byte-identical to the stock file). Soong then finds
+# the name in two namespaces and refuses to resolve it for the vendor
+# partition. use_custom_usb_gadget_rc defaults to false, which leaves the
+# generic module enabled; opting in disables it and lets ours win.
+$(call soong_config_set,mediatek_gadget,use_custom_usb_gadget_rc,true)
+
 PRODUCT_PACKAGES += \
     fstab.mt6878 \
     init.connectivity.rc \
