@@ -1,1 +1,1 @@
-vendor.mediatek.hardware.camera.isphal.IISPModule/internal/1 u:object_r:mtk_hal_isphal_service:s0
+# IISPModule is labeled in sepolicy_vndr as hal_camera_service.

@@ -1,0 +1,14 @@
+# Recovery USB gadget for scout (Motorola Edge 60 Fusion, MT6878).
+#
+# Lineage/crDroid recovery imports /init.recovery.${ro.hardware}.rc
+# (bootable/recovery/etc/init.rc). That same init.rc sets sys.usb.configfs=0
+# on early-init, which selects the legacy /sys/class/android_usb path. This
+# SoC has no android_usb driver; the gadget is configfs + mtu3 (UDC
+# 11201000.usb0 from the DTB).
+#
+# Vendor init normally sets these two properties, but recovery does not
+# mount vendor. Without this file adbd can be running and the PC still
+# sees nothing. Use `on init` so it runs after recovery's early-init zero.
+on init
+    setprop sys.usb.configfs 1
+    setprop sys.usb.controller "11201000.usb0"

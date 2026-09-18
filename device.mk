@@ -207,7 +207,9 @@ PRODUCT_PACKAGES += \
     ueventd.mt6878.rc
 
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/init/fstab.mt6878:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.mt6878
+    $(DEVICE_PATH)/init/fstab.mt6878:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.mt6878 \
+    $(DEVICE_PATH)/init/init.recovery.mt6878.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.mt6878.rc \
+    $(DEVICE_PATH)/init/init.recovery.mt6878.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.scout.rc
 
 # Keylayout
 PRODUCT_COPY_FILES += \

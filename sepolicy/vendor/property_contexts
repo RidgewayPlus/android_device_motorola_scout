@@ -5,7 +5,8 @@ persist.vendor.mot_audio.speaker_status u:object_r:vendor_audio_prop:s0
 vendor.mot_ota_tuning.valid      u:object_r:vendor_mot_camera_prop:s0
 persist.vendor.camera.privapp.list  u:object_r:vendor_mot_camera_prop:s0
 ro.vendor.camera.               u:object_r:vendor_mot_camera_prop:s0
-vendor.camera.                  u:object_r:vendor_mot_camera_prop:s0
+# Do not use vendor.camera. — sepolicy_vndr already has
+# vendor.camera.save.temp.video (duplicate prefix).
 
 # FPS
 vendor.hw.fingerprint.status     u:object_r:vendor_mot_prop:s0
@@ -49,8 +50,6 @@ persist.vendor.bluetooth.broadcaster.tx_pwr u:object_r:vendor_bluetooth_prop:s0
 persist.vendor.boot.bootseq.history u:object_r:vendor_mot_prop:s0
 ro.vendor.boot_seq u:object_r:vendor_mot_prop:s0
 
-# GPU / Mali
-vendor.mali. u:object_r:vendor_gpu_prop:s0
-ro.vendor.arm.egl. u:object_r:vendor_gpu_prop:s0
-persist.vendor.debug.gpud. u:object_r:vendor_gpu_prop:s0
+# GPU / Mali — sepolicy_vndr already labels vendor.mali.,
+# persist.vendor.debug.gpud., and ro.vendor.arm.*
 ro.vendor.mtk.gpud. u:object_r:vendor_gpu_prop:s0
